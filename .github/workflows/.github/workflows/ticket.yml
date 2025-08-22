@@ -1,0 +1,16 @@
+name: melon-ticket-checker
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 每5分钟运行一次
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Tickets
+        uses: mooyoul/melon-ticket-actions@v1.1.0
+        with:
+          product-id: 211740          # 你的演出ID（就是链接里的 prodId=211740）
+          schedule-id: 20250913         # 对应13号场次的ID（需要你找到）
+          seat-id: 1_0                # 座位ID（也需要确认）
+          slack-incoming-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          message: '13号场次有票啦！快去看！'
